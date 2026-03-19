@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Lista zadań{% endblock %}
+
+{% block content %}
+<h1>Lista zadań</h1>
+
+{% if tasks %}
+    <ul class="list-group">
+        {% for task in tasks %}
+            <li class="list-group-item">
+                <a href="{% url 'task_detail' task.pk %}">
+                    <strong>{{ task.title }}</strong>
+                </a>
+
+                <br>
+                Status: <span class="badge bg-primary">{{ task.status }}</span>
+                | Projekt: {{ task.project }}
+                | Termin: {{ task.due_date }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="alert alert-warning">Brak zadań</div>
+{% endif %}
+{% endblock %}

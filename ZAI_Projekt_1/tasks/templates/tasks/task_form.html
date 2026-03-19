@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if form.instance.pk %}Edytuj zadanie{% else %}Dodaj zadanie{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    {% if form.instance.pk %}
+        Edytuj zadanie
+    {% else %}
+        Dodaj nowe zadanie
+    {% endif %}
+</h1>
+
+<div class="card">
+    <div class="card-body">
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    Popraw błędy w formularzu!
+                </div>
+            {% endif %}
+
+            <div class="mb-3">
+                <label class="form-label">Projekt</label>
+                {{ form.project }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tytuł</label>
+                {{ form.title }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Opis</label>
+                {{ form.description }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                {{ form.status }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Termin</label>
+                {{ form.due_date }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tagi</label>
+                {{ form.tags }}
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Zapisz
+            </button>
+
+            <a href="{% url 'task_list' %}" class="btn btn-secondary">
+                Anuluj
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
